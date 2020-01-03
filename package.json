@@ -1,0 +1,16 @@
+{
+  "name": "puppeteer-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test",
+    "screenshot": "node screenshot",
+    "pdf": "node pdf"
+  },
+  "author": "王恩博 <webkubor@163.com> (wangenbo.cn)",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^2.0.0"
+  }
+}
