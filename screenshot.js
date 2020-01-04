@@ -2,7 +2,7 @@
 const puppeteer = require('puppeteer');
 puppeteer.launch().then(async browser => {
   const page = await browser.newPage();
-  await page.goto('http://localhost:4000/post/hello/');
+  await page.goto('http://localhost:8080');
   /** 
    * screenshot
    * path 路径
