@@ -4,8 +4,8 @@ const puppeteer = require('puppeteer');
   const browser = await  puppeteer.launch() 
   const page = await browser.newPage();
   await page.goto('http://localhost:8080', {waitUntil: 'networkidle2'});
-  await page.evaluate(() => console.log(`url is ${location.href}`));
+
   await page.emulateMedia('screen');
-  await page.pdf({path: '王恩博.pdf', format: 'A4'}); // create a PDF
+  await page.pdf({path: '王恩博.pdf', format: 'A4',scale: 0.7,margin:{top: '20px',left: '20px',bottom: '20px',right: '20px'}}); // create a PDF
   await browser.close();
 })();
