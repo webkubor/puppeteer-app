@@ -76,5 +76,5 @@ puppeteer.launch({headless: false}).then(async browser => {
   await page.click('.menu .item:nth-child(8)'); //常见问题
   await page.waitFor(800)
 
-  // await browser.close();
+  await browser.close();
 });
