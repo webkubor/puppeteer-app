@@ -5,10 +5,10 @@ const goBack = '.van-nav-bar__left'
 
 puppeteer.launch({headless: false}).then(async browser => {
   const page = await browser.newPage();
+  await page.emulate(iPhone);
   await page.goto('https://www.priv-shield.com', {
     waitUntil: 'networkidle0',
   }); 
-  await page.emulate(iPhone);
   // 开始自动化测试
   console.log('test start.....')
   await page.screenshot({ path: 'home.png',fullPage: true, omitBackground:false });
