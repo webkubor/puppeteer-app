@@ -1,5 +1,5 @@
 {
-  "name": "puppeteer-demo",
+  "name": "kubor-screenshot-out",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,6 +8,17 @@
     "screenshot": "node screenshot",
     "pdf": "node pdf"
   },
+  "keywords": [
+    "快照",
+    "pdf",
+    "导出",
+    "照片",
+    "screenshot",
+    "webkubor",
+    "kubor",
+    "王恩博",
+    "puppeteer"
+  ],
   "author": "王恩博 <webkubor@163.com> (wangenbo.cn)",
   "license": "ISC",
   "dependencies": {
