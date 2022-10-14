@@ -22,6 +22,6 @@
   "author": "王恩博 <webkubor@163.com> (wangenbo.cn)",
   "license": "ISC",
   "dependencies": {
-    "puppeteer": "^2.0.0"
+    "puppeteer": "^18.2.1"
   }
 }
