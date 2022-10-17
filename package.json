@@ -9,17 +9,16 @@
     "pdf": "node pdf"
   },
   "keywords": [
-    "快照",
+    "screenshot",
     "pdf",
-    "导出",
-    "照片",
+    "export",
+    "photo",
     "screenshot",
     "webkubor",
     "kubor",
-    "王恩博",
     "puppeteer"
   ],
-  "author": "王恩博 <webkubor@163.com> (wangenbo.cn)",
+  "author": "webkubor <webkubor@163.com> (wangenbo.cn)",
   "license": "ISC",
   "dependencies": {
     "puppeteer": "^18.2.1"
