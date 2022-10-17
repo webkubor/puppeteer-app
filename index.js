@@ -10,7 +10,7 @@ const puppeteer = require('puppeteer');
     height: 660,
     deviceScaleFactor: 1
   });
-  await page.goto('https://www.priv-shield.com', {waitUntil: 'networkidle2'});
+  await page.goto('https://www.yuque.com/dashboard', {waitUntil: 'networkidle2'});
   await page.waitFor(5000);
   await browser.close();
 })();
