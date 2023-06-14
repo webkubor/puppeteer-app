@@ -4,14 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "index": "node index",
-    "fetch": "node fetch",
-    "spider": "node spider",
-    "ip": "node getUserIp",
-    "url": "node transURLParams",
-    "fs": "node fileSteam",
-    "screen": "node screenshot",
-    "pdf": "node pdf"
+    "index": "node index"
   },
   "keywords": [
     "screenshot",
