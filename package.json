@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "index": "node index"
+    "index": "node index",
+    "webhook": "node ./api/webhook"
   },
   "keywords": [
     "screenshot",

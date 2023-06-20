@@ -16,16 +16,16 @@ const onLineMessage = {
 	"content": {
 		"post": {
 			"zh_cn": {
-				"title": "【语雀】tarspay今日上线通知-test",
+				"title": "【语雀】tarspay今日上线通知(v1.6.9)",
 				"content": [
 					[{
 							"tag": "text",
-							"text": "项目有更新: "
+							"text": "TP项目有更新: "
 						},
 						{
 							"tag": "a",
-							"text": "请查看",
-							"href": "https://chaoduichen.yuque.com/staff-ab80td/web/egvwo8d3ohyuqf1v"
+							"text": "前端改动请查看",
+							"href": "https://chaoduichen.yuque.com/staff-ab80td/web/nagw2nkq9wfage8b"
 						}
 					]
 				]
