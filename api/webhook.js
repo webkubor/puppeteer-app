@@ -1,16 +1,4 @@
 const flyio = require('flyio');
-
-
- // 构造要发送的消息体
- const textMessage = {
-    msg_type: 'text',
-    content: {
-      text: '【语雀】新更新提醒'
-    }
-  };
-
-
-
 const onLineMessage = {
 	"msg_type": "post",
 	"content": {
