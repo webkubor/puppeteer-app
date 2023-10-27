@@ -23,7 +23,7 @@ async function captureScreenshot(url, outputFilePath) {
 
   await browser.close();
 }
-const url = 'https://kuldar.com';
+const url = 'https://www.yuque.com/webkubor';
 
 
 const outPath = 'screenshot/' + getMainDomain(url) + '.png';
