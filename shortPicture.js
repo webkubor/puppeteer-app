@@ -15,7 +15,7 @@ async function captureScreenshot(url, outputFilePath) {
 
   await browser.close();
 }
-const url = 'https://www.yuque.com/webkubor';
+const url = 'https://www.spacedrive.com';
 
 captureScreenshot(url, 'screenshot/yuque.png')
   .then(() => console.log('Screenshot captured'))

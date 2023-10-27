@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "index": "node index",
+    "short": "node shortPicture",
     "webhook": "node ./api/webhook"
   },
   "keywords": [
