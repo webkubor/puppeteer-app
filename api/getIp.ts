@@ -1,4 +1,6 @@
+import {coloredLog} from "./color";
 //获取本机ip地址
+
 function getIPAdress() {
   var interfaces = require('os').networkInterfaces();　　
   for (var devName in interfaces) {　　　　
@@ -13,4 +15,4 @@ function getIPAdress() {
 }
 
 var ip = getIPAdress();
-console.log("\n--------IP地址：" + ip+ "------\n");
+coloredLog("\n--------IP地址：" + ip+ "------\n");

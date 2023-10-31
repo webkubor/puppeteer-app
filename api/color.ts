@@ -31,7 +31,7 @@ export enum Color {
     YellowGreenBackground = "\x1b[43m" // 黄绿色背景
 }
 
-export function coloredLog(message: string, color: string): void {
+export function coloredLog(message: string, color: string = Color.BrightGreen): void {
     const colorCode = color;
     if (colorCode) {
         console.log(colorCode + message + Color.Reset);
