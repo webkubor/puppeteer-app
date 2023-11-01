@@ -23,10 +23,10 @@ async function captureScreenshot(url, outputFilePath) {
 
   await browser.close();
 }
-const url = 'https://www.yuque.com/webkubor';
+const url = 'https://www.apple.com.cn';
 
 
-const outPath = 'screenshot/' + getMainDomain(url) + '.png';
+const outPath = 'short/screenshot/' + getMainDomain(url) + '.png';
 
 captureScreenshot(url, outPath)
   .then(() => console.log('Screenshot captured'))
@@ -35,8 +35,9 @@ captureScreenshot(url, outPath)
 
   
 function getMainDomain(url) {
- const parsedUrl = new URL(url);
- return parsedUrl.hostname.replace(/\./g, '.');
+  const parsedUrl = new URL(url);
+  const hostname = parsedUrl.hostname;
+  return hostname;
 }
 
 
