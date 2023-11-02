@@ -23,7 +23,7 @@ async function captureScreenshot(url, outputFilePath) {
 
   await browser.close();
 }
-const url = 'https://www.apple.com.cn';
+const url = 'https://isux.tencent.com';
 
 
 const outPath = 'short/screenshot/' + getMainDomain(url) + '.png';
