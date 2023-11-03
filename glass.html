@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毛玻璃</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+  main{
+    width: 100%;
+    margin: auto;
+    padding: 59px 29px;
+    border-radius: .3em;
+    text-shadow: 0 1px 1px hsla(0, 0%, 100%, .3); 
+    box-shadow: 0 0 0 1px hsla(0, 0%, 100%, .3) inset, 0 .3em 1em rgba(0, 0, 0, 0.12);
+    font: 150%/1.6 Baskerville, Palatino, serif;
+  }
+  main, main > div::before {
+    background: url("https://lhammer.cn/You-need-to-know-css/static/city-night.jpg") fixed 0 / cover;
+    min-height: 25vh;
+  }
+  main > div::before{
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0; 
+    z-index: -1; 
+    filter: blur(10px);
+    margin: -30px;
+  }
+  main > div{
+    font-style: italic;
+    color: #ffffff;
+    hyphens: auto;
+    /* background: hsla(0,0%,100%,.5); */
+    backdrop-filter: blur(10px); 
+    overflow: hidden;
+    position: relative;
+  }
+  main > div cite{
+    font-style: normal;
+  }
+  main footer {
+    text-align: right;
+  }
+</style>
+<body>
+    <main class="main">
+        <div>
+          "O God, I could be bounded in a nutshell and count myself a king of infinite space, were it not that I have bad dreams."<br>
+          “即使我身处果壳之中，我仍以为自己是宇宙之王”
+          <footer>——
+            <cite>William Shakespeare</cite>
+          </footer>
+        </div>
+      </main>
+</body>
+</html>

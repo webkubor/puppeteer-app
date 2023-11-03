@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>不规则卡片</title>
 </head>
 <style>
- tips {
-  color: #333333;
-  border: 1px solid #f4f0ea;
-}
-tips:before {
-  border-left-color: inherit;
-}
+  main {
+    width: 100%;
+    padding: 80px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; 
+  }
+  .coupon-card {
+    width: 200px;
+    height: 120px;
+    background-image: radial-gradient(circle at 100px -8px, transparent 20px, #b4a078 21px);
+  }
 </style>
 <body>
-    <tips>wwwww</tips>
+  <main>
+    <div class="coupon-card"></div>
+  </main>
 </body>
 </html>
