@@ -3,25 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>不规则卡片</title>
+    <title>提交虚化背景</title>
 </head>
 <style>
   main {
     width: 100%;
-    padding: 80px 0px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around; 
+    user-select: none;
+    font: 14px / 1 Helvetica, sans-serif;
   }
-  .coupon-card {
-    width: 200px;
-    height: 120px;
-    background-image: radial-gradient(circle at 100px -8px, transparent 20px, #b4a078 21px);
+  main > h5 {
+    margin: 30px 30px 15px;
+  }
+  main > section {
+    width: 100%;
+    padding: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+  main > section:nth-of-type(1) .overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, .8);
+  }
+  main > section .lightbox {
+    width: 60%; height: 51px;
+    background-color: #FFF;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  main > section:nth-of-type(1) .lightbox {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  main > section:nth-of-type(2) .lightbox {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 50vmax rgba(0, 0, 0, .8);
+  }
+  main > section dialog{
+    width: 400px; height: 130px;
+    margin: auto;
+    padding: 53px 151px;
+  }
+  main > section dialog::backdrop {
+    background: rgba(0, 0, 0, .8)
   }
 </style>
 <body>
   <main>
-    <div class="coupon-card"></div>
+    <h5>1️⃣ 增加遮罩层方案</h5>
+    <section>
+      <p>Bacon ipsum dolor amet consectetur short loin ut tri-tip alcatra ground round jowl beef meatloaf in pork. Elit
+          chicken ea spare ribs. Shank andouille ex boudin picanha turkey esse. Do doner fugiat tongue.
+      </p>
+      <p>Chuck filet mignon flank pork chop mollit enim veniam sed pork loin aliquip sausage prosciutto in deserunt. Nostrud
+          porchetta non nulla sunt. Cupim et velit picanha laborum salami capicola exercitation alcatra sausage cillum
+          shoulder minim esse. Pig boudin aliquip aute, tail ut cow incididunt short loin aliqua.
+      </p>
+      <p>Doner alcatra pastrami pig, strip steak eu in frankfurter occaecat in filet mignon chuck short loin nulla meatloaf.
+          Adipisicing aliqua kielbasa nulla proident. Ground round meatloaf kevin, shank adipisicing pork frankfurter
+          t-bone spare ribs cupidatat. Sed ham non duis enim, in ipsum fugiat est tongue short ribs ad bresaola prosciutto.
+          Non minim picanha, ad in occaecat fugiat veniam dolor deserunt.
+      </p>
+      <div class="overlay">
+          <div class="lightbox">You-need-to-know-css-tricks</div>
+      </div>
+    </section>
+    <h5>2️⃣ box-shadow方案</h5>
+    <section>
+      <p>Bacon ipsum dolor amet consectetur short loin ut tri-tip alcatra ground round jowl beef meatloaf in pork. Elit
+          chicken ea spare ribs. Shank andouille ex boudin picanha turkey esse. Do doner fugiat tongue.
+      </p>
+      <p>Chuck filet mignon flank pork chop mollit enim veniam sed pork loin aliquip sausage prosciutto in deserunt. Nostrud
+          porchetta non nulla sunt. Cupim et velit picanha laborum salami capicola exercitation alcatra sausage cillum
+          shoulder minim esse. Pig boudin aliquip aute, tail ut cow incididunt short loin aliqua.
+      </p>
+      <p>Doner alcatra pastrami pig, strip steak eu in frankfurter occaecat in filet mignon chuck short loin nulla meatloaf.
+          Adipisicing aliqua kielbasa nulla proident. Ground round meatloaf kevin, shank adipisicing pork frankfurter
+          t-bone spare ribs cupidatat. Sed ham non duis enim, in ipsum fugiat est tongue short ribs ad bresaola prosciutto.
+          Non minim picanha, ad in occaecat fugiat veniam dolor deserunt.
+      </p>
+      <div class="lightbox">You-need-to-know-css-tricks</div>
+    </section>
+    <h5>3️⃣ backdrop方案</h5>
+    <section>
+      <button onclick="document.querySelector('#modal').showModal()">Click me</button>
+      <dialog id="modal">
+        Hello!
+        <button onclick="this.parentNode.close()">Close</button>
+      </dialog>
+    </section>
   </main>
 </body>
 </html>
