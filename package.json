@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "index": "node index",
-    "short": "node ./short/index.mjs",
+    "index": "nodemon index",
+    "short": "nodemon ./short/index.mjs",
     "webhook": "ts-node ./webhooks/yuque",
     "telegram": "ts-node ./telegram/index"
   },
@@ -22,6 +22,7 @@
   "dependencies": {
     "crypto-js": "^4.1.1",
     "flyio": "^0.6.14",
+    "node-telegram-bot-api": "^0.66.0",
     "nodemon": "^2.0.4",
     "puppeteer": "^23.2.0",
     "typescript": "^5.2.2",
