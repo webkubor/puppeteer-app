@@ -5,7 +5,8 @@
   "scripts": {
     "index": "node index",
     "short": "node ./short/index.mjs",
-    "webhook": "ts-node ./webhooks/yuque"
+    "webhook": "ts-node ./webhooks/yuque",
+    "telegram": "ts-node ./telegram/index"
   },
   "keywords": [
     "screenshot",
@@ -22,7 +23,7 @@
     "crypto-js": "^4.1.1",
     "flyio": "^0.6.14",
     "nodemon": "^2.0.4",
-    "puppeteer": "^19.7.1",
+    "puppeteer": "^23.2.0",
     "typescript": "^5.2.2",
     "xlsx": "^0.16.6"
   },
