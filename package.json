@@ -6,7 +6,8 @@
     "index": "nodemon index",
     "short": "nodemon ./short/index.mjs",
     "webhook": "ts-node ./webhooks/yuque",
-    "telegram": "ts-node ./telegram/index"
+    "getText": "node ./spider/getHtml",
+    "telegram": "nodemon ./telegram/index"
   },
   "keywords": [
     "screenshot",
