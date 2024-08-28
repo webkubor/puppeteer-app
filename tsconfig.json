@@ -1,4 +1,14 @@
 {
+  "compilerOptions": {
+    "target": "es6",
+    "module": "esnext",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "resolve": {
+    "extensions": [".ts", ".js", "mjs"],
+  },
   "exclude": [
     "node_modules"
   ]
