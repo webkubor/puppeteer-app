@@ -1,5 +1,4 @@
 import {coloredLog} from "./color";
-//获取本机ip地址
 
 function getIPAdress() {
   var interfaces = require('os').networkInterfaces();　　

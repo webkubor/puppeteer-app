@@ -1,4 +1,4 @@
-var fly = require("flyio")
+import fly from "flyio"
 
 
 fly.config.baseURL = `https://api.defipay.biz/api-service/`

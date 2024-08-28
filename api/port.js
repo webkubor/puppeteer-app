@@ -1,4 +1,4 @@
-var net = require('net')
+import net from'net';
 import {coloredLog} from "./color";
 
 // 检测端口是否被占用

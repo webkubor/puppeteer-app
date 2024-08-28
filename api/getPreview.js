@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from'axios';
 
 const url = 'https://c12.onepy.top/proof/?enc=b46GoOCK7A3i6XvotpZKKrblTOZ5gxIctavsXULG67uXnFZvYdx5Nrq5u46xfOH13LrPazJKRqTmp7EUU9qUUg==#/index';
 
