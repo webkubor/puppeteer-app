@@ -18,6 +18,7 @@
     "kubor",
     "puppeteer"
   ],
+  "type": "module",
   "author": "webkubor <webkubor@163.com> (wangenbo.cn)",
   "license": "ISC",
   "dependencies": {

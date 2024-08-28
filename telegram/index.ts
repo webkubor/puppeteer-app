@@ -1,7 +1,3 @@
-// "https://t.me/webkubor_bot"
-
-const chalk = require('chalk');
-
 const TelegramBot = require('node-telegram-bot-api');
 
 var botToken = '6493294406:AAGBOx9P1AShJwvL5G3EeZvS9TPAwLTMmNI'
@@ -17,11 +13,6 @@ bot.on('message', (msg) => {
     bot.sendMessage(msg.chat.id, message, { parse_mode: 'HTML' });
 });
 
-function outPrint(obj) {
-    const formattedObj = JSON.stringify(JSON.parse(obj), null, 2);
-    return chalk.yellow(formattedObj);
-    
-}
 
 
 
