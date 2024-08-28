@@ -6,7 +6,7 @@
     "index": "node index",
     "getText": "node ./spider/getHtml",
     "short": "nodemon ./short/index.mjs",
-    "getIP": "nodemon ./api/getPreview.js",
+    "getIp": "nodemon ./api/getIp.js",
     "dns": "nodemon ./api/dns",
     "webhook": "ts-node ./webhooks/yuque.ts",
     "telegram": "nodemon ./telegram/index"
