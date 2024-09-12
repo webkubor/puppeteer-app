@@ -10,10 +10,7 @@ function outPrint(obj) {
 }
 
 
-function _judgeTypes(target) {
-    return Object.prototype.toString.call(target).replace(/^\[object\s(\w+)\]$/, '$1').toLowerCase()
-    //return Reflect.apply(Object.prototype.toString, target, []).replace(/^\[object\s(\w+)\]$/, '$1').toLowerCase()
-}
+
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 const server = await createServer({
