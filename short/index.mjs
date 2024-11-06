@@ -23,7 +23,8 @@ async function captureScreenshot(url, outputFilePath) {
 
   await browser.close();
 }
-const url = 'https://isux.tencent.com';
+// const url = 'https://payment.mynagad.com:30000/check-out/auth/account/MTEwNTE5NDQxNDc0Mi42ODMyMjkxOTA2MTUzOTkuMjQxMTA1OTAzMDAwMDQ1NzI2ODguNzM5YjlkYzhhNDRlNGRlYmI1ZDU=';
+const url = 'https://payment.mynagad.com:30000/check-out/auth/account/MTEwNTE5NDQxNDc0Mi42ODMyMjkxOTA2MTUzOTkuMjQxMTA1OTAzMDAwMDQ1NzI2ODguNzM5YjlkYzhhNDRlNGRlYmI1ZDU=';
 
 
 const outPath = 'short/screenshot/' + getMainDomain(url) + '.png';

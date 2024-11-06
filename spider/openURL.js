@@ -21,6 +21,7 @@ app.get('/start-puppeteer', async (req, res) => {
         await page.goto(url);
         await page.waitForSelector('#input-15');
         await page.type('#input-15', '300');
+        await page.type('#input-18', '111111111111');
         await page.waitForTimeout(1000); // 等待1秒
         const isVisible = await page.evaluate(() => {
             const button = document.querySelector('button.v-btn.theme--light.elevation-6.v-size--default.primary');

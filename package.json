@@ -7,7 +7,7 @@
     "getText": "node ./spider/getHtml",
     "getURL": "node ./spider/url",
     "openURL": "node ./spider/openURL",
-    "short": "nodemon ./short/index.mjs",
+    "pic": "nodemon ./short/index.mjs",
     "getIp": "nodemon ./api/getIp.js",
     "dns": "nodemon ./api/dns",
     "webhook": "ts-node ./webhooks/yuque.ts",
