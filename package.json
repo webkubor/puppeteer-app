@@ -5,7 +5,7 @@
   "scripts": {
     "index": "node index",
     "getText": "node ./spider/getHtml",
-    "short": "nodemon ./short/index.mjs",
+    "short": "node ./short/index.mjs",
     "getIp": "nodemon ./api/getIp.js",
     "dns": "nodemon ./api/dns",
     "webhook": "ts-node ./webhooks/yuque.ts",
