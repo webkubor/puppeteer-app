@@ -1,13 +1,6 @@
-import chalk from 'chalk';
 import { fileURLToPath } from 'node:url'
 import { createServer } from 'vite'
 
-
-
-function outPrint(obj) {
-    const formattedObj = JSON.stringify(JSON.parse(obj), null, 2);
-    return chalk.yellow(formattedObj);
-}
 
 
 
@@ -25,6 +18,3 @@ await server.listen()
 
 server.printUrls()
 server.bindCLIShortcuts({ print: true })
-
-
-console.log(`output->outPrint`, outPrint('初始化'))
