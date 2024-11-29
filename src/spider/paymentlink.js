@@ -2,24 +2,11 @@ import express from 'express';
 import puppeteer from 'puppeteer-extra';
 import puppeteerExtraPluginStealth from 'puppeteer-extra-plugin-stealth';
 import cors from 'cors';
-import os from 'os';
+import {getLocalIPAddress} from '../api/os.js';
 
 const app = express();
 const port = 3000;
 
-// 获取本机局域网 IP 地址
-function getLocalIPAddress() {
-    const interfaces = os.networkInterfaces();
-    for (const interfaceName in interfaces) {
-        for (const iface of interfaces[interfaceName]) {
-            // 查找 IPv4 地址
-            if (iface.family === 'IPv4' && !iface.internal) {
-                return iface.address;
-            }
-        }
-    }
-    return 'localhost';
-}
 
 // 使用 CORS 中间件
 app.use(cors());

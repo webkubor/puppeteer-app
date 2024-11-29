@@ -1,26 +1,10 @@
 {
   "name": "kubor-screenshot-out",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "index": "node index",
-    "getText": "node ./spider/getHtml",
-    "short": "node ./short/index.mjs",
-    "getIp": "nodemon ./api/getIp.js",
-    "dns": "nodemon ./api/dns",
-    "webhook": "ts-node ./webhooks/yuque.ts",
-    "telegram": "nodemon ./telegram/index"
+   "start": "nodemon src/index.js"
   },
   "type": "module",
-  "keywords": [
-    "screenshot",
-    "pdf",
-    "export",
-    "photo",
-    "webkubor",
-    "kubor",
-    "puppeteer"
-  ],
   "author": "webkubor <webkubor@163.com> (wangenbo.cn)",
   "license": "ISC",
   "dependencies": {
@@ -28,6 +12,7 @@
     "crypto-js": "^4.1.1",
     "express": "^4.21.1",
     "flyio": "^0.6.14",
+    "module-alias": "^2.2.3",
     "node-telegram-bot-api": "^0.66.0",
     "nodemon": "^2.0.4",
     "puppeteer": "^23.2.0",

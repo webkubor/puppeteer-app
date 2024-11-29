@@ -17,6 +17,9 @@ dependencies:
   flyio:
     specifier: ^0.6.14
     version: 0.6.14
+  module-alias:
+    specifier: ^2.2.3
+    version: 2.2.3
   node-telegram-bot-api:
     specifier: ^0.66.0
     version: 0.66.0(request@2.88.2)
@@ -1862,6 +1865,10 @@ packages:
     dependencies:
       for-in: 0.1.8
       is-extendable: 0.1.1
+    dev: false
+
+  /module-alias@2.2.3:
+    resolution: {integrity: sha512-23g5BFj4zdQL/b6tor7Ji+QY4pEfNH784BMslY9Qb0UnJWRAt+lQGLYmRaM0KDBwIG23ffEBELhZDP2rhi9f/Q==}
     dev: false
 
   /ms@2.0.0:
