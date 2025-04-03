@@ -2,7 +2,7 @@
   "name": "kubor-screenshot-out",
   "version": "1.0.0",
   "scripts": {
-   "start": "nodemon src/index.js"
+    "tel": "nodemon src/telegram/index.js"
   },
   "type": "module",
   "author": "webkubor <webkubor@163.com> (wangenbo.cn)",
