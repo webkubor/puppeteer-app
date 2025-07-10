@@ -117,15 +117,32 @@ async function simulateOldUserCache(target) {
   console.log(chalk.cyan.bold('\n====== ✅ 检测汇总报告 ======\n'));
 
   const plainResults = results.map(item => ({
-    '站点': item.url,
-    '缓存策略': item.cacheControl === 'no-store' ? '✅ no-store' :
-             item.cacheControl === 'no-cache' ? '⚠️ no-cache' : '❌ 缺失',
-    '协商缓存': item.etagOrLastMod === 'NONE' ? '✅ 无' : '❌ 存在',
-    'CDN缓存': item.cfStatus === 'DYNAMIC' ? '✅ 未缓存' :
-               item.cfStatus === '无' ? '❌ 无' : `❌ ${item.cfStatus}`,
-    'JS是否带hash': item.jsHash === 'OK' ? '✅ 有' : '❌ 缺失',
-    '页面渲染结果': item.whiteScreen === '正常' ? '✅ 正常' :
-                   item.whiteScreen === '白屏' ? '❌ 白屏' : '⚠️ 异常',
+    '站点 URL': item.url,
+    '缓存策略 (Cache-Control)': item.cacheControl === 'no-store'
+      ? '✅ 强缓存禁用（no-store）'
+      : item.cacheControl === 'no-cache'
+        ? '⚠️ 允许协商缓存（no-cache）'
+        : '❌ 缺失或配置错误',
+  
+    '协商缓存 (ETag / Last-Modified)': item.etagOrLastMod === 'NONE'
+      ? '✅ 已禁用'
+      : '❌ 存在（可能触发 304）',
+  
+    'CDN 缓存状态 (cf-cache-status)': item.cfStatus === 'DYNAMIC'
+      ? '✅ 未缓存（DYNAMIC）'
+      : item.cfStatus === '无'
+        ? 'ℹ️ 未使用 Cloudflare'
+        : `❌ ${item.cfStatus} —— 已被缓存`,
+  
+    'JS 是否带 Hash（防止混存）': item.jsHash === 'OK'
+      ? '✅ 带 Hash'
+      : '❌ 缺失 Hash（更新可能混存）',
+  
+    '页面渲染结果（模拟老用户访问）': item.whiteScreen === '正常'
+      ? '✅ 正常渲染'
+      : item.whiteScreen === '白屏'
+        ? '❌ 白屏（混存风险）'
+        : '⚠️ 异常或未知错误',
   }));
   console.table(plainResults);
 
