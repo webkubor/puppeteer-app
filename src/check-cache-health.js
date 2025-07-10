@@ -3,14 +3,20 @@ import chalk from 'chalk';
 import * as cheerio from 'cheerio';
 import puppeteer from 'puppeteer';
 
-const TARGET_URL = 'https://bd.tpservice.vip/';
+// 支持多个域名
+const TARGET_URLS = [
+  'https://bd.tpservice.vip/',
+  'https://pk.tpservice.vip/',
+  'https://bkash.bdt-pay.com',
+  'https://nagad.bdt-pay.com',
+  'https://payment.larkpay.io/',
+  'https://bd.larkpay.io',
+  'https://pk.larkpay.io',
+];
 
-/**
- * 第一部分：响应头配置检测
- */
-async function checkHeaderCacheConfig() {
+async function checkHeaderCacheConfig(target) {
   try {
-    const res = await fly.get(TARGET_URL, {
+    const res = await fly.get(target, {
       headers: {
         'Cache-Control': 'no-cache',
       },
@@ -19,138 +25,96 @@ async function checkHeaderCacheConfig() {
     const status = res.status;
     const headers = res.headers;
 
-    console.log(chalk.blue.bold(`\n🧪 [阶段一] 检查响应头缓存配置 → ${TARGET_URL}`));
-    console.log(`📡 HTTP 状态码: ${chalk.yellow(status)}（理想为 200，不能是 304）\n`);
+    console.log(chalk.blue.bold(`\n🧪 [阶段一] 响应头检测 → ${target}`));
+    console.log(`📡 状态码: ${chalk.yellow(status)}（理想为 200）\n`);
 
     // Cache-Control
     const cacheControl = headers['cache-control'];
     console.log(chalk.white.bold('📦 Cache-Control'));
-    console.log(chalk.gray('⚙️ 强缓存（浏览器直接使用缓存，不访问服务器）'));
-
-    if (cacheControl) {
-      if (/no-store/i.test(cacheControl)) {
-        console.log(chalk.green('✅ 存在，值为 no-store —— 禁止强缓存 ✅'));
-      } else if (/no-cache/i.test(cacheControl)) {
-        console.log(chalk.yellow('⚠️ 存在，值为 no-cache —— 仍会触发协商缓存 ⚠️'));
-      } else if (/max-age=\d+/.test(cacheControl)) {
-        console.log(chalk.red(`❌ 存在，值为 ${cacheControl} —— 启用了强缓存 ❌`));
-      } else {
-        console.log(chalk.red(`❌ 存在，值为 ${cacheControl} —— 配置不明确 ❌`));
-      }
+    if (cacheControl?.includes('no-store')) {
+      console.log(chalk.green('✅ no-store —— 禁止强缓存 ✅'));
+    } else if (cacheControl?.includes('no-cache')) {
+      console.log(chalk.yellow('⚠️ no-cache —— 会触发协商缓存 ⚠️'));
     } else {
-      console.log(chalk.red('❌ 不存在 —— 浏览器可能默认缓存 ❌'));
+      console.log(chalk.red(`❌ ${cacheControl || '无'} —— 存在缓存风险 ❌`));
     }
     console.log('');
 
-    // ETag
-    console.log(chalk.white.bold('📦 ETag'));
-    console.log(chalk.gray('⚙️ 协商缓存：浏览器询问是否修改'));
-
-    if (!headers['etag']) {
-      console.log(chalk.green('✅ 未设置 —— 不触发协商缓存 ✅'));
-    } else {
-      console.log(chalk.red(`❌ 存在，值为 ${headers['etag']} —— 启用协商缓存 ❌`));
-    }
-    console.log('');
-
-    // Last-Modified
-    console.log(chalk.white.bold('📦 Last-Modified'));
-    console.log(chalk.gray('⚙️ 协商缓存：根据时间判断是否变更'));
-
-    if (!headers['last-modified']) {
+    // ETag / Last-Modified
+    console.log(chalk.white.bold('📦 协商缓存：ETag / Last-Modified'));
+    if (!headers['etag'] && !headers['last-modified']) {
       console.log(chalk.green('✅ 未设置 —— 不会触发 304 ✅'));
     } else {
-      console.log(chalk.red(`❌ 存在，值为 ${headers['last-modified']} —— 可能触发 304 ❌`));
+      console.log(chalk.red(`❌ 存在 —— ${headers['etag'] || ''} / ${headers['last-modified'] || ''}`));
     }
-    console.log('');
 
     // cf-cache-status
-    const rawCfStatus = headers['cf-cache-status'];
-    const cfStatus = Array.isArray(rawCfStatus) ? rawCfStatus[0] : rawCfStatus;
+    const cfStatus = Array.isArray(headers['cf-cache-status'])
+      ? headers['cf-cache-status'][0]
+      : headers['cf-cache-status'];
 
-    console.log(chalk.white.bold('📦 cf-cache-status'));
-    console.log(chalk.gray('⚙️ CDN 缓存状态（Cloudflare 专用）'));
-    console.log(chalk.gray(`值为：${cfStatus}\n`));
-
-    if (!cfStatus) {
-      console.log(chalk.red('❌ 缺少 cf-cache-status —— 请求未走 CDN ❌'));
-    } else if (cfStatus === 'DYNAMIC') {
-      console.log(chalk.green('✅ DYNAMIC —— Cloudflare 未缓存 HTML ✅'));
+    console.log(chalk.white.bold('\n📦 cf-cache-status'));
+    if (cfStatus === 'DYNAMIC') {
+      console.log(chalk.green('✅ DYNAMIC —— 未被 Cloudflare 缓存 ✅'));
     } else {
-      console.log(chalk.red(`❌ ${cfStatus} —— Cloudflare 正在缓存 HTML ❌`));
-    }
-
-    // 状态码检查
-    if (status === 304) {
-      console.log(chalk.red('❌ 返回 304 —— 使用了协商缓存 ❌'));
-    } else {
-      console.log(chalk.green('✅ 返回 200 —— 正常加载 ✅'));
+      console.log(chalk.red(`❌ ${cfStatus || '无'} —— 存在 CDN 缓存 ❌`));
     }
 
     // JS hash 检查
-    console.log('');
-    console.log(chalk.white.bold('📦 JS 文件路径 Hash 检查'));
-    const html = res.data;
-    const $ = cheerio.load(html);
+    console.log(chalk.white.bold('\n📦 JS 路径 Hash 检查'));
+    const $ = cheerio.load(res.data);
     const scripts = $('script[src]');
     let jsOk = true;
-
     scripts.each((_, el) => {
       const src = $(el).attr('src');
-      if (src && src.includes('index') && !/index-[\w\d]{6,}\.js/.test(src)) {
+      if (src?.includes('index') && !/index-[\w\d]{6,}\.js/.test(src)) {
         jsOk = false;
         console.log(chalk.red(`❌ 未带 hash：${src}`));
       }
     });
+    if (jsOk) console.log(chalk.green('✅ 所有 JS 路径带 hash ✅'));
 
-    if (jsOk) {
-      console.log(chalk.green('✅ 所有 JS 路径带 hash ✅'));
+    // 状态码
+    if (status === 304) {
+      console.log(chalk.red('\n❌ 返回 304 —— 使用了协商缓存 ❌'));
     } else {
-      console.log(chalk.red('🛠 建议：构建时确保 JS 带 hash 文件名'));
+      console.log(chalk.green('\n✅ 返回 200 —— 正常加载 ✅'));
     }
-
   } catch (err) {
-    console.error(chalk.red('❌ 检测失败：'), err.message);
+    console.error(chalk.red(`❌ 请求失败 ${target}: ${err.message}`));
   }
 }
 
-async function simulateOldUserCache() {
+async function simulateOldUserCache(target) {
   const browser = await puppeteer.launch({ headless: 'new' });
   const page = await browser.newPage();
 
-  console.log(chalk.blue.bold('\n🧪 [阶段二] 模拟老用户连续访问测试混存（含白屏）\n'));
+  console.log(chalk.blue.bold(`\n🧪 [阶段二] 模拟老用户连续访问 → ${target}`));
 
-  // 模拟用户第一次访问（缓存 HTML 和资源）
-  await page.setCacheEnabled(true); // 默认即为 true，可省略
-  await page.goto(TARGET_URL, { waitUntil: 'load', timeout: 20000 });
+  await page.setCacheEnabled(true);
+  await page.goto(target, { waitUntil: 'load', timeout: 20000 });
 
-  const cachedScript = await page.$$eval('script[src]', scripts =>
+  const scriptPath = await page.$$eval('script[src]', scripts =>
     scripts.map(el => el.getAttribute('src')).find(src => src && (src.includes('index') || src.includes('app')))
   );
+  console.log(chalk.gray(`📦 首次访问 JS：${scriptPath}`));
 
-  console.log(chalk.gray(`📦 首次访问主 JS 路径：${cachedScript}`));
-
-  // 第二次访问，同一个 tab（继承缓存）
   await page.reload({ waitUntil: 'load', timeout: 20000 });
 
-  const isWhiteScreen = await page.evaluate(() => {
-    return !document.body || !document.body.innerText.trim();
-  });
-
-  if (isWhiteScreen) {
-    console.log(chalk.bgRed.white.bold('\n❌ 页面白屏 —— 疑似混存问题 ❌'));
-    console.log(chalk.red('🛠 建议：确保 HTML 设置 Cache-Control: no-store，并禁止协商缓存'));
+  const isWhite = await page.evaluate(() => !document.body || !document.body.innerText.trim());
+  if (isWhite) {
+    console.log(chalk.bgRed.white.bold('❌ 页面白屏 —— 疑似混存 ❌'));
   } else {
     const title = await page.title();
-    console.log(chalk.green(`\n✅ 页面渲染正常 —— 暂未检测到混存（标题：${title}） ✅`));
+    console.log(chalk.green(`✅ 页面正常，标题：${title}`));
   }
 
   await browser.close();
 }
-/**
- * 主函数
- */
+
 (async () => {
-  await checkHeaderCacheConfig();
-  await simulateOldUserCache();
+  for (const url of TARGET_URLS) {
+    await checkHeaderCacheConfig(url);
+    await simulateOldUserCache(url);
+  }
 })();
