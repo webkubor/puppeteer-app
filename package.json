@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "tel": "nodemon src/telegram/index.js",
-    "check": "nodemon src/check-cache-health.js"
+    "check": "node src/check-cache-health.js"
   },
   "type": "module",
   "author": "webkubor <webkubor@163.com> (wangenbo.cn)",
