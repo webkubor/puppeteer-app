@@ -4,13 +4,14 @@ import * as cheerio from 'cheerio';
 import puppeteer from 'puppeteer';
 
 const TARGET_URLS = [
+   'https://pk-test.tpservice.vip',
   'https://bd.tpservice.vip/',
   'https://pk.tpservice.vip/',
-  'https://bkash.bdt-pay.com',
-  'https://nagad.bdt-pay.com',
-  'https://payment.larkpay.io/',
-  'https://bd.larkpay.io',
-  'https://pk.larkpay.io',
+  // 'https://bkash.bdt-pay.com',
+  // 'https://nagad.bdt-pay.com',
+  // 'https://payment.larkpay.io/',
+  // 'https://bd.larkpay.io',
+  // 'https://pk.larkpay.io',
 ];
 
 const results = [];
