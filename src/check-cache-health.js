@@ -5,8 +5,9 @@ import puppeteer from 'puppeteer';
 
 const TARGET_URLS = [
    'https://pk-test.tpservice.vip',
+   'https://bd-test.tpservice.vip',
   'https://bd.tpservice.vip/',
-  'https://pk.tpservice.vip/',
+  // 'https://pk.tpservice.vip/',
   // 'https://bkash.bdt-pay.com',
   // 'https://nagad.bdt-pay.com',
   // 'https://payment.larkpay.io/',
